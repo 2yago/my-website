@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>購入予定額 - </title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    .cart-item img {
+      width: 80px;
+      margin-right: 15px;
+      border-radius: 4px;
+    }
+    .cart-item-details {
+      flex: 1;
+    }
+    .quantity-input {
+      width: 50px;
+      font-size: 16px;
+      padding: 3px;
+      margin-left: 10px;
+    }
+      .remove-button {
+    margin-left: 10px;
+    color: red;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .remove-button:hover {
+    text-decoration: underline;
+  }
+    .total-price {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>購入予定額</h1>
+  <div id="cartItems"></div>
+  <div class="total-price" id="totalPrice">合計: ¥0</div>
+
+  <script>
+    // 商品ごとの購入上限数（product1.htmlの上限2個に合わせる）
+    const productLimits = {
+      '堀越公平『僕のヒーローアカデミア』原画展　公式図録': 2,
+      '洗濯ヒーローウォッシュの洗濯ネット': 2,
+      'ぷくぷくポーチ　内外未分化ろきくん': 2,
+      'デクとかっちゃんの幼馴染クリアファイル': 2,
+      '平和の象徴オールマイトクリアファイル': 2,
+      '地獄の轟くん家クリアファイル': 2,
+      'メガネクロス　飯田天哉': 2,
+      'メガネクロス　イレイザーヘッド': 2,
+      'ベストジーニストのデニムポーチ': 2,
+      '梅雨ちゃんのピタッとマグネット2個セット': 2,
+      'だいなまブランケットinクッション': 2,
+      'エリちゃんのリンゴアメキーホルダー': 2,
+      'ファーポーチ　ホークス': 2,
+      'ファーポーチ　ミルコ': 2,
+      'コスチューム柄ポーチ　デク': 2,
+      'コスチューム柄ポーチ　大・爆・殺・神ダイナマイト': 2,
+      'コスチューム柄ポーチ　ショート': 2,
+      'コレクション缶バッジ　KEY VISUAL HEROES VS VILLAINS EXTREME（全16種／ランダム1種入り）': 5,
+      'コレクション缶バッジ　KEY VISUAL HEROES VS VILLAINS EXTREME　全種セット（全16種入り）': 1,
+      'コレクション缶バッジ　KEY VISUAL HEROES VS VILLAINS SUPREME（全16種／ランダム1種入り）': 5,
+      'コレクション缶バッジ　KEY VISUAL HEROES VS VILLAINS SUPREME　全種セット（全16種入り）': 1,
+      'のるキャラマスコット®3体セット　CHILDHOOD': 2,
+      'だいなま　もちもちぬいぐるみ': 2,
+      'アートコースター®（全55種／ランダム5種入り）': 5,
+      'アートコースター®　全種セット（全55種&特典3種／計58種入り）': 1,
+      'モザイクアートパズル': 2,
+      'フレークシール': 2,
+      '色紙コレクション（全8種／ランダム1種入り）': 5,
+      '色紙コレクション　全種セット（全8種入り）': 1,
+      '万年日めくりカレンダー': 2,
+      '1年A組　魂の叫びメッセージステッカー': 2,
+      '緑谷出久の「紡いだ力」結晶ブロックメモ': 2,
+      'マグネットステッカーコレクション（全30種／ランダム2種入り）': 5,
+      'マグネットステッカーコレクション　全種セット（全30種入り）': 1,
+      '爆豪勝己の「音で殺るぞ！！」マルチイヤホンケース': 2,
+      '爆豪勝己の「寝言は寝て死ね」安眠枕カバー（安眠祈願ステッカーつき）': 2,
+      'スクエアステッカーコレクション（全40種／ランダム4種入り）': 5,
+      'スクエアステッカーコレクション　全種セット（全40種入り）': 1,
+      'メンズノンノの全サ第五弾Tシャツ　Lサイズ）': 2,
+      'メンズノンノの全サ第五弾Tシャツ　XLサイズ）': 2,
+      'だいなまエコバッグ': 2,
+      'フェイスタオル　PINK': 2,
+      'フェイスタオル　BLUE': 2,
+      'トートバッグ　緑谷出久': 2,
+      'トートバッグ　爆豪勝己': 2,
+      '名言アクリルバッジコレクション（全12種／ランダム1種入り）': 5,
+      '名言アクリルバッジコレクション　全種セット（全12種入り）': 1,
+      'メモリアルコレクション（全32種／ランダム2種入り）': 5,
+      'メモリアルコレクション　全種セット（全32種入り）': 1,
+      'ワンシーンカードコレクション（全15種／ランダム１種入り）': 5,
+      'ワンシーンカードコレクション　全種セット（全15種入り）': 1,
+      '爆豪勝己の爆ギレアイマスク': 2,
+      '常闇踏陰のダークシャドウタオル': 2,
+      '轟焦凍の保冷保温バッグ': 2,
+      '心操人使の洗脳ミラー': 2,
+      '箔押しクリアカードコレクション　12枚セット（全4組／ランダム1組入り）': 5,
+      '箔押しクリアカードコレクション　全種セット（全48枚入り）': 1,
+      'SMAAAASH!!! KARUTA': 2,
+      'KATSUKI MEMORY': 2,
+      'アクリル“X”フィギュアコレクション（全20種／ランダム1種入り）': 5,
+      'アクリル“X”フィギュアコレクション　全種セット（全20種入り）': 1,
+      'アクリルMEGAフィギュア W デク＆オールマイト': 2,
+      'アクリルMEGAフィギュア W 大・爆・殺・神ダイナマイト＆死柄木弔': 2,
+      'アクリルMEGAフィギュア W ショート＆荼毘': 2,
+      'アクリルMEGAフィギュア W ウラビティ＆トガヒミコ': 2,
+      'アクリルパズルコレクション（全27組／ランダム1組入り）': 5,
+      'アクリルパズルコレクション　全種セット（全27組入り）': 1,
+      'リバーシブルバケットハット　デクシープ': 2,
+      'キャップ　バクドッグ': 2,
+      '見えてますけど！？はがくれさんレンチキュラーアクリルキーホルダー': 2,
+      '死柄木弔の崩壊バランスタワー': 2,
+      '轟焦凍VS荼毘Tシャツ　Lサイズ': 2,
+      '轟焦凍VS荼毘Tシャツ　XLサイズ': 2,
+      '爆豪勝己の雑魚どもへの呼び名コマステッカー コレクション（全14種／ランダム1種入り）': 5,
+      '爆豪勝己の雑魚どもへの呼び名コマステッカー コレクション　全種セット（全14種入り）': 1,
+      '通形ミリオの透過シール': 2,
+      '"敵(ヴィラン)連合”マグネットセット': 2,
+      '三方背ケース入りポストカードセット（45枚入り）': 2,
+      'クリアケース入りポストカードセット（8枚入り）': 2,
+      '缶入りポストカードセット（20枚入り）': 2,
+      'ポストカード　キービジュアル2枚セット': 2,
+      'クリアファイル　キービジュアル「ヒーローVS敵(ヴィラン)」': 2,
+      'B2ポスター　キービジュアル「ヒーローVS敵(ヴィラン)」': 2,
+      'A2アートポスター2枚セット　【The Beginning】': 2,
+      'A2アートポスター2枚セット　【頑張れ】': 2,
+      'キービジュアルショッパー': 2,
+      'デジタル原稿プリント　緑谷出久': 2,
+      'デジタル原稿プリント　爆豪勝己': 2,
+      'デジタル原稿プリント　轟焦凍': 2,
+      'デジタル原稿プリント　元A組': 2,
+      '合金チャームコレクション（全6種／ランダム1種入り）': 5,
+      '合金チャームコレクション　全種セット（全6種入り）': 1,
+      'メタルキーホルダーコレクション　KEY VISUAL（全14種／ランダム1種入り）': 5,
+      'メタルキーホルダーコレクション　KEY VISUAL　全種セット（全14種入り）': 1,
+      'スカジャン　GREAT EXPLOSION MURDER GOD DYNAMIGHT　Ｍサイズ': 2,
+      'スカジャン　GREAT EXPLOSION MURDER GOD DYNAMIGHT　Lサイズ': 2,
+      'ドラマティックジオラマパネル': 2,
+      '額装高精細デジタルカラー　キービジュアル「緑谷出久・死柄木弔」': 2,
+      '額装高精細デジタルカラー　キービジュアル「ヒーローVS敵(ヴィラン)」': 2,
+      'アクリルフィギュアオールスターセット　KEY VISUAL HEROES VS VILLAINS': 2,
+      'オーロラアクリルスタンド　緑谷出久': 2,
+      'オーロラアクリルスタンド　爆豪勝己': 2,
+      'オーロラアクリルスタンド　麗日お茶子': 2,
+      'オーロラアクリルスタンド　飯田天哉': 2,
+      'オーロラアクリルスタンド　轟焦凍': 2,
+      'にょきんと TVアニメ『僕のヒーローアカデミア』マスコットフィギュア（全8種／ランダム1種入り）': 5,
+      'にょきんと TVアニメ『僕のヒーローアカデミア』マスコットフィギュア（全8種入り）': 1,
+      '“黒デク” フィギュア 「堀越耕平『僕のヒーローアカデミア』原画展」 Limited edition': 2,
+    };
+
+    // カート表示を描画
+    function renderCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const container = document.getElementById('cartItems');
+      container.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const limit = productLimits[item.name] || 99;
+        total += item.price * item.quantity;
+
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+
+        itemDiv.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-details">
+            <div>${item.name}</div>
+            <div>価格: ¥${item.price.toLocaleString()}</div>
+            <div>
+              数量: 
+              <input type="number" min="1" max="${limit}" class="quantity-input" value="${item.quantity}" onchange="updateQuantity(${index}, this.value)">
+              (最大${limit}個)
+              <button class="remove-button" onclick="removeItem(${index})" title="取消">取消</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(itemDiv);
+      });
+
+      document.getElementById('totalPrice').textContent = `合計: ¥${total.toLocaleString()}`;
+    }
+
+    // 数量変更処理
+    function updateQuantity(index, newQuantity) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      newQuantity = parseInt(newQuantity);
+      if (isNaN(newQuantity) || newQuantity < 1) {
+        alert('数量は1以上の数字を入力してください。');
+        renderCart();
+        return;
+      }
+
+      const item = cart[index];
+      const maxLimit = productLimits[item.name] || 99;
+      if (newQuantity > maxLimit) {
+        alert(`「${item.name}」は最大${maxLimit}個まで購入できます。`);
+        renderCart();
+        return;
+      }
+
+      cart[index].quantity = newQuantity;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    // 削除処理
+    function removeItem(index) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    window.onload = renderCart;
+  </script>
+
+</body>
+</html>

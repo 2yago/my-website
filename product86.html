@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>オーロラアクリルスタンド　飯田天哉</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      box-sizing: border-box;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      width: 100vw;
+      max-width: 100%;
+      margin: 0 auto 20px auto;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.3s ease;
+      will-change: transform;
+    }
+
+    .carousel-track img {
+      width: 100vw;
+      height: auto;
+      flex-shrink: 0;
+      user-select: none;
+      -webkit-user-drag: none;
+      border-radius: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    label, h2, p {
+      margin: 20px;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1 style="margin: 20px;">オーロラアクリルスタンド　飯田天哉</h1>
+
+<!-- カルーセル -->
+<div class="carousel">
+  <div class="carousel-track" id="carouselTrack">
+    <img src="images86/ImageDrain-20250602T121331.626Z.JPEG" alt="画像1">
+  </div>
+</div>
+
+<h2>1,980円（税込）</h2>
+
+<label>数量: <input type="number" id="quantity" value="1" min="1" max="2"></label>
+<button onclick="addToCart()" style="margin: 0 20px;">カートに追加</button>
+
+<p>
+購入個数制限:2個<br><br>
+キラキラと輝くオーロラ仕様のアクリルスタンド！
+<br><br>
+・サイズ（約）：110×125mm<br>
+<br><br>
+©堀越耕平／集英社
+</p>
+
+<script>
+  function addToCart() {
+    const quantity = parseInt(document.getElementById('quantity').value);
+    const maxQuantity = 2;
+
+    const product = {
+      name: 'オーロラアクリルスタンド　飯田天哉',
+      price: 1980,
+      image: 'images86/ImageDrain-20250602T121331.626Z.JPEG',
+      quantity: quantity
+    };
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existing = cart.find(item => item.name === product.name);
+    const currentQuantity = existing ? existing.quantity : 0;
+
+    if (currentQuantity + quantity > maxQuantity) {
+      alert(`この商品は最大${maxQuantity}個までしか購入できません。`);
+      return;
+    }
+
+    if (existing) {
+      existing.quantity += quantity;
+    } else {
+      cart.push(product);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('カートに追加しました！');
+  }
+
+  const track = document.getElementById('carouselTrack');
+  const images = track.querySelectorAll('img');
+  const total = images.length;
+  let currentIndex = 0;
+
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let dragging = false;
+
+  track.addEventListener('touchstart', touchStart);
+  track.addEventListener('touchmove', touchMove);
+  track.addEventListener('touchend', touchEnd);
+
+  function touchStart(e) {
+    startX = e.touches[0].clientX;
+    dragging = true;
+  }
+
+  function touchMove(e) {
+    if (!dragging) return;
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - startX;
+    currentTranslate = prevTranslate + diff;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  }
+
+  function touchEnd(e) {
+    dragging = false;
+    const movedBy = currentTranslate - prevTranslate;
+
+    if (movedBy < -50 && currentIndex < total - 1) {
+      currentIndex++;
+    }
+    if (movedBy > 50 && currentIndex > 0) {
+      currentIndex--;
+    }
+    setPositionByIndex();
+  }
+
+  function setPositionByIndex() {
+    const slideWidth = window.innerWidth;
+    currentTranslate = -currentIndex * slideWidth;
+    prevTranslate = currentTranslate;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  }
+
+  // 初期位置セット
+  setPositionByIndex();
+  // ウィンドウサイズが変わったときも対応
+  window.addEventListener('resize', setPositionByIndex);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>
+コレクション缶バッジ　KEY VISUAL HEROES VS VILLAINS EXTREME（全16種／ランダム1種入り） - 商品詳細</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      width: 800px;
+      margin: 20px auto;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.3s ease;
+      will-change: transform;
+    }
+
+    .carousel-track img {
+      width: 800px;
+      flex-shrink: 0;
+      user-select: none;
+      -webkit-user-drag: none;
+      border-radius: 8px;
+    }
+    p {
+    font-size: 16px;
+    line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>コレクション缶バッジ　KEY VISUAL HEROES VS VILLAINS EXTREME（全16種／ランダム1種入り）</h1>
+
+<!-- カルーセル -->
+<div class="carousel">
+  <div class="carousel-track" id="carouselTrack">
+    <img src="images18/ImageDrain-20250602T121249.555Z.JPEG" alt="画像1">
+    <img src="images18/ImageDrain-20250602T121250.102Z.JPEG" alt="画像2">
+    <img src="images18/ImageDrain-20250602T121249.662Z.JPEG" alt="画像3">
+    <img src="images18/ImageDrain-20250602T121250.208Z.JPEG" alt="画像4">
+    <img src="images18/ImageDrain-20250602T121249.998Z.JPEG" alt="画像5">
+    <!-- 追加画像があればここに追加 -->
+  </div>
+</div>
+<h2>各440円（税込）</h2>
+
+<label>数量: <input type="number" id="quantity" value="1" min="1" max="5"></label>
+<button onclick="addToCart()">カートに追加</button>
+
+<p>
+購入個数制限:5個<br><br>
+本展キービジュアル「ヒーローVS敵(ヴィラン)」に描かれたキャラクターを、缶バッジに。
+  <br><br>
+・サイズ（約）：直径75mm<br>
+※本商品はBOX（全種セット）も販売いたします。<br>
+※単品（ランダム）とBOX（全種セット）の同時購入はできません。
+ <br><br>
+©堀越耕平／集英社
+</p>
+
+
+<script>
+  function addToCart() {
+    const quantity = parseInt(document.getElementById('quantity').value);
+    const maxQuantity = 5; // ★ ここが上限設定
+
+    const product = {
+      name: 'コレクション缶バッジ　KEY VISUAL HEROES VS VILLAINS EXTREME（全16種／ランダム1種入り）',
+      price: 440,
+      image: 'images18/ImageDrain-20250602T121249.555Z.JPEG',
+      quantity: quantity
+    };
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existing = cart.find(item => item.name === product.name);
+
+    const currentQuantity = existing ? existing.quantity : 0;
+
+    if (currentQuantity + quantity > maxQuantity) {
+      alert(`この商品は最大${maxQuantity}個までしか購入できません。`);
+      return;
+    }
+
+    if (existing) {
+      existing.quantity += quantity;
+    } else {
+      cart.push(product);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('カートに追加しました！');
+  }
+
+  const track = document.getElementById('carouselTrack');
+  const images = track.querySelectorAll('img');
+  const total = images.length;
+  let currentIndex = 0;
+
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let dragging = false;
+
+  track.addEventListener('touchstart', touchStart);
+  track.addEventListener('touchmove', touchMove);
+  track.addEventListener('touchend', touchEnd);
+
+  function touchStart(e) {
+    startX = e.touches[0].clientX;
+    dragging = true;
+  }
+
+  function touchMove(e) {
+    if (!dragging) return;
+    const currentX = e.touches[0].clientX;
+    const diff = currentX - startX;
+    currentTranslate = prevTranslate + diff;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  }
+
+  function touchEnd(e) {
+    dragging = false;
+    const movedBy = currentTranslate - prevTranslate;
+
+    if (movedBy < -50 && currentIndex < total - 1) {
+      currentIndex++;
+    }
+    if (movedBy > 50 && currentIndex > 0) {
+      currentIndex--;
+    }
+    setPositionByIndex();
+  }
+
+  function setPositionByIndex() {
+    currentTranslate = -currentIndex * 800; // 画像幅に合わせる
+    prevTranslate = currentTranslate;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  }
+
+  // 初期位置セット
+  setPositionByIndex();
+</script>
+
+</body>
+</html>
