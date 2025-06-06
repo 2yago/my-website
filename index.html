@@ -5,39 +5,85 @@
   <title>商品一覧ページ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
- body { font-family: sans-serif; margin: 20px; }
-    .keywords button {
-      margin: 5px; padding: 5px 10px; border: none;
-      background-color: #e0e0e0; border-radius: 5px;
-      cursor: pointer;
-    }
-    .product { margin: 10px 0; display: flex; align-items: center; }
-    .product img { width: 100px; height: 100px; object-fit: cover; margin-right: 15px; }
-    .hidden { display: none; }
-    .product a {
-      color: black;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-    }
-    .product a p {
-      margin: 0;
-    }
-    .cart-link {
+/* ベース設定 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: sans-serif;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+/* キーワードボタン */
+.keywords button {
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 商品一覧グリッド */
+#productList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+
+/* 商品カード */
+.product {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  display: block; /* data-tagsでの表示制御に対応 */
+}
+
+/* 非表示商品（JSで切り替え） */
+.hidden {
+  display: none !important;
+}
+
+/* 商品画像 */
+.product img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* 商品名テキスト */
+.product p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* 商品リンク */
+.product a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+/* カートボタン */
+.cart-link {
   display: inline-block;
   padding: 8px 16px;
-  background-color: #2a9df4; /* お好みの色 */
+  background-color: #2a9df4;
   color: white;
   text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  margin-top: 8px;
 }
 
 .cart-link:hover {
   background-color: #1a7cd6;
 }
-
 
   </style>
 </head>
