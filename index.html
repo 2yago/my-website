@@ -95,69 +95,70 @@ html, body {
 
   <!-- キーワード一覧 -->
   <div class="keywords">
-    <strong>関連ワード:</strong>
-    <button onclick="filterProducts('すべて')">すべて</button>
-    <button onclick="filterProducts('ALL')">ALL</button>
-    <button onclick="filterProducts('緑谷出久')">緑谷出久</button>
-    <button onclick="filterProducts('爆豪勝己')">爆豪勝己</button>
-    <button onclick="filterProducts('轟焦凍')">轟焦凍</button>
-    <button onclick="filterProducts('麗日お茶子')">麗日お茶子</button>
-    <button onclick="filterProducts('緑谷出久')">飯田天哉</button>
-    <button onclick="filterProducts('蛙吹梅雨')">蛙吹梅雨</button>
-    <button onclick="filterProducts('切島鋭児郎')">切島鋭児郎</button>
-    <button onclick="filterProducts('芦戸三奈')">芦戸三奈</button>
-    <button onclick="filterProducts('八百万百')">八百万百</button>
-    <button onclick="filterProducts('常闇踏影')">常闇踏影</button>
-    <button onclick="filterProducts('峰田実')">峰田実</button>
-    <button onclick="filterProducts('上鳴電気')">上鳴電気</button>
-    <button onclick="filterProducts('耳郎響香')">耳郎響香</button>
-    <button onclick="filterProducts('青山優雅')">青山優雅</button>
-    <button onclick="filterProducts('葉隠透')">葉隠透</button>
-    <button onclick="filterProducts('障子目蔵')">障子目蔵</button>
-    <button onclick="filterProducts('口田甲司')">口田甲司</button>
-    <button onclick="filterProducts('瀬呂範太')">瀬呂範太</button>
-    <button onclick="filterProducts('尾白猿夫')">尾白猿夫</button>
-    <button onclick="filterProducts('砂糖力動')">佐藤力動</button>
-    <button onclick="filterProducts('心操人志')">心操人志</button>
-    <button onclick="filterProducts('物間寧人')">物間寧人</button>
-    <button onclick="filterProducts('拳藤一佳')">拳藤一佳</button>
-    <button onclick="filterProducts('通形ミリオ')">通形ミリオ</button>
-    <button onclick="filterProducts('天喰環')">天喰環</button>
-    <button onclick="filterProducts('波動ねじれ')">波動ねじれ</button>
-    <button onclick="filterProducts('夜嵐イナサ')">夜嵐イナサ</button>
-    <button onclick="filterProducts('現見ケミィ')">現見ケミィ</button>
-    <button onclick="filterProducts('肉倉精児')">肉倉精児</button>
-    <button onclick="filterProducts('発目明')">発目明</button>
-    <button onclick="filterProducts('オールマイト')">オールマイト</button>
-    <button onclick="filterProducts('エンデヴァー')">エンデヴァー</button>
-    <button onclick="filterProducts('ホークス')">ホークス</button>
-    <button onclick="filterProducts('イレイザー・ヘッド')">イレイザー・ヘッド</button>
-    <button onclick="filterProducts('スターアンドストライプ')">スターアンドストライプ</button>
-    <button onclick="filterProducts('ベストジーニスト')">ベストジーニスト</button>
-    <button onclick="filterProducts('エッジショット')">エッジショット</button>
-    <button onclick="filterProducts('プレゼント・マイク')">プレゼント・マイク</button>
-    <button onclick="filterProducts('ミルコ')">ミルコ</button>
-    <button onclick="filterProducts('ファットガム')">ファットガム</button>
-    <button onclick="filterProducts('サー・ナイトアイ')">サー・ナイトアイ</button>
-    <button onclick="filterProducts('Mt.レディ')">Mt.レディ</button>
-    <button onclick="filterProducts('ミッドナイト')">ミッドナイト</button>
-    <button onclick="filterProducts('ウォッシュ')">ウォッシュ</button>
-    <button onclick="filterProducts('死柄木弔')">死柄木弔</button>
-    <button onclick="filterProducts('オール・フォー・ワン')">オール・フォー・ワン</button>
-    <button onclick="filterProducts('荼毘')">荼毘</button>
-    <button onclick="filterProducts('トガヒミコ')">トガヒミコ</button>
-    <button onclick="filterProducts('トゥワイス')">トゥワイス</button>
-    <button onclick="filterProducts('黒霧')">黒霧</button>
-    <button onclick="filterProducts('Mr.'コンプレス')">Mr.コンプレス</button>
-    <button onclick="filterProducts('スピナー')">スピナー</button>
-    <button onclick="filterProducts('オーバーホール')">オーバーホール</button>
-    <button onclick="filterProducts('レディ・ナガン')">レディ・ナガン</button>
-    <button onclick="filterProducts('ステイン')">ステイン</button>
-    <button onclick="filterProducts('ジェントル・クリミナル')">ジェントル・クリミナル</button>
-    <button onclick="filterProducts('ラブラバ')">ラブラバ</button>
-    <button onclick="filterProducts('壊理')">壊理</button>
+    <strong>関連ワード </strong>
+    <button class="tag-button" onclick="filterProducts(this, 'すべて')">すべて</button>
+    <button class="tag-button" onclick="filterProducts(this, 'ALL')">ALL</button>
+    <button class="tag-button" onclick="filterProducts(this, '緑谷出久')">緑谷出久</button>
+    <button class="tag-button" onclick="filterProducts(this, '爆豪勝己')">爆豪勝己</button>
+    <button class="tag-button" onclick="filterProducts(this, '轟焦凍')">轟焦凍</button>
+    <button class="tag-button" onclick="filterProducts(this, '麗日お茶子')">麗日お茶子</button>
+    <button class="tag-button" onclick="filterProducts(this, '緑谷出久')">飯田天哉</button>
+    <button class="tag-button" onclick="filterProducts(this, '蛙吹梅雨')">蛙吹梅雨</button>
+    <button class="tag-button" onclick="filterProducts(this, '切島鋭児郎')">切島鋭児郎</button>
+    <button class="tag-button" onclick="filterProducts(this, '芦戸三奈')">芦戸三奈</button>
+    <button class="tag-button" onclick="filterProducts(this, '八百万百')">八百万百</button>
+    <button class="tag-button" onclick="filterProducts(this, '常闇踏影')">常闇踏影</button>
+    <button class="tag-button" onclick="filterProducts(this, '峰田実')">峰田実</button>
+    <button class="tag-button" onclick="filterProducts(this, '上鳴電気')">上鳴電気</button>
+    <button class="tag-button" onclick="filterProducts(this, '耳郎響香')">耳郎響香</button>
+    <button class="tag-button" onclick="filterProducts(this, '青山優雅')">青山優雅</button>
+    <button class="tag-button" onclick="filterProducts(this, '葉隠透')">葉隠透</button>
+    <button class="tag-button" onclick="filterProducts(this, '障子目蔵')">障子目蔵</button>
+    <button class="tag-button" onclick="filterProducts(this, '口田甲司')">口田甲司</button>
+    <button class="tag-button" onclick="filterProducts(this, '瀬呂範太')">瀬呂範太</button>
+    <button class="tag-button" onclick="filterProducts(this, '尾白猿夫')">尾白猿夫</button>
+    <button class="tag-button" onclick="filterProducts(this, '砂糖力動')">佐藤力動</button>
+    <button class="tag-button" onclick="filterProducts(this, '心操人志')">心操人志</button>
+    <button class="tag-button" onclick="filterProducts(this, '物間寧人')">物間寧人</button>
+    <button class="tag-button" onclick="filterProducts(this, '拳藤一佳')">拳藤一佳</button>
+    <button class="tag-button" onclick="filterProducts(this, '通形ミリオ')">通形ミリオ</button>
+    <button class="tag-button" onclick="filterProducts(this, '天喰環')">天喰環</button>
+    <button class="tag-button" onclick="filterProducts(this, '波動ねじれ')">波動ねじれ</button>
+    <button class="tag-button" onclick="filterProducts(this, '夜嵐イナサ')">夜嵐イナサ</button>
+    <button class="tag-button" onclick="filterProducts(this, '現見ケミィ')">現見ケミィ</button>
+    <button class="tag-button" onclick="filterProducts(this, '肉倉精児')">肉倉精児</button>
+    <button class="tag-button" onclick="filterProducts(this, 発目明')">発目明</button>
+    <button class="tag-button" onclick="filterProducts(this, 'オールマイト')">オールマイト</button>
+    <button class="tag-button" onclick="filterProducts(this, 'エンデヴァー')">エンデヴァー</button>
+    <button class="tag-button" onclick="filterProducts(this, 'ホークス')">ホークス</button>
+    <button class="tag-button" onclick="filterProducts(this, 'イレイザー・ヘッド')">イレイザー・ヘッド</button>
+    <button class="tag-button" onclick="filterProducts(this, 'スターアンドストライプ')">スターアンドストライプ</button>
+    <button class="tag-button" onclick="filterProducts(this, 'ベストジーニスト')">ベストジーニスト</button>
+    <button class="tag-button" onclick="filterProducts(this, 'エッジショット')">エッジショット</button>
+    <button class="tag-button" onclick="filterProducts(this, 'プレゼント・マイク')">プレゼント・マイク</button>
+    <button class="tag-button" onclick="filterProducts(this, 'ミルコ')">ミルコ</button>
+    <button class="tag-button" onclick="filterProducts(this, 'ファットガム')">ファットガム</button>
+    <button class="tag-button" onclick="filterProducts(this, 'サー・ナイトアイ')">サー・ナイトアイ</button>
+    <button class="tag-button" onclick="filterProducts(this, 'Mt.レディ')">Mt.レディ</button>
+    <button class="tag-button" onclick="filterProducts(this, 'ミッドナイト')">ミッドナイト</button>
+    <button class="tag-button" onclick="filterProducts(this, 'ウォッシュ')">ウォッシュ</button>
+    <button class="tag-button" onclick="filterProducts(this, '死柄木弔')">死柄木弔</button>
+    <button class="tag-button" onclick="filterProducts(this, 'オール・フォー・ワン')">オール・フォー・ワン</button>
+    <button class="tag-button" onclick="filterProducts(this, '荼毘')">荼毘</button>
+    <button class="tag-button" onclick="filterProducts(this, 'トガヒミコ')">トガヒミコ</button>
+    <button class="tag-button" onclick="filterProducts(this, 'トゥワイス')">トゥワイス</button>
+    <button class="tag-button" onclick="filterProducts(this, '黒霧')">黒霧</button>
+    <button class="tag-button" onclick="filterProducts(this, 'Mr.'コンプレス')">Mr.コンプレス</button>
+    <button class="tag-button" onclick="filterProducts(this, 'スピナー')">スピナー</button>
+    <button class="tag-button" onclick="filterProducts(this, 'オーバーホール')">オーバーホール</button>
+    <button class="tag-button" onclick="filterProducts(this, 'レディ・ナガン')">レディ・ナガン</button>
+    <button class="tag-button" onclick="filterProducts(this, 'ステイン')">ステイン</button>
+    <button  class="tag-button"onclick="filterProducts(this, 'ジェントル・クリミナル')">ジェントル・クリミナル</button>
+    <button class="tag-button" onclick="filterProducts(this, 'ラブラバ')">ラブラバ</button>
+    <button class="tag-button" onclick="filterProducts(this, '壊理')">壊理</button>
 
   </div>
+<p id="currentTag">現在のタグ: すべて</p>
 
   <!-- 商品リスト -->
   <div id="productList">
@@ -697,19 +698,30 @@ html, body {
     </div>
   </div>
 
-  <script>
-    function filterProducts(keyword) {
-      const products = document.querySelectorAll('.product');
-      products.forEach(product => {
-        const tags = product.getAttribute('data-tags');
-        if (keyword === 'すべて' || tags.includes(keyword)) {
-          product.classList.remove('hidden');
-        } else {
-          product.classList.add('hidden');
-        }
-      });
-    }
-  </script>
+<script>
+  function filterProducts(clickedButton, keyword) {
+    // 商品表示の切り替え
+    const products = document.querySelectorAll('.product');
+    products.forEach(product => {
+      const tags = product.getAttribute('data-tags');
+      if (keyword === 'すべて' || tags.includes(keyword)) {
+        product.classList.remove('hidden');
+      } else {
+        product.classList.add('hidden');
+      }
+    });
+
+    // 現在のタグ名表示
+    document.getElementById('currentTag').textContent = `現在のタグ: ${keyword}`;
+
+    // ボタンの色（active クラス）の切り替え
+    document.querySelectorAll('.tag-button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    clickedButton.classList.add('active');
+  }
+</script>
+
 
 </body>
 </html>
