@@ -45,15 +45,6 @@
       color: black;
     }
 
-.hidden {
-  display: none !important;
-}
-
-.product-list {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
   </style>
 </head>
 <body>
@@ -678,20 +669,6 @@
         }
       });
     }
-
-function filterProducts(keyword) {
-  const products = document.querySelectorAll('.product');
-  setTimeout(() => {
-    products.forEach(product => {
-      const tags = product.getAttribute('data-tags');
-      if (keyword === 'すべて' || tags.includes(keyword)) {
-        product.classList.remove('hidden');
-      } else {
-        product.classList.add('hidden');
-      }
-    });
-  }, 0);
-}
   </script>
 
 </body>
