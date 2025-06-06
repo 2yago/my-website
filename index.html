@@ -5,33 +5,43 @@
   <title>商品一覧ページ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+    body {
       font-family: sans-serif;
+      margin: 10px;
     }
 
     #productList {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 10px;
-      padding: 10px;
     }
 
     .product {
-      background: #eee;
+      background-color: #f9f9f9;
       padding: 10px;
-      text-align: center;
       border-radius: 8px;
+      text-align: center;
     }
 
     .product img {
       width: 100%;
       height: auto;
-      max-width: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .product p {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .product a {
+      text-decoration: none;
+      color: black;
+    }
+
+    .hidden {
+      display: none;
     }
 
   </style>
@@ -255,9 +265,9 @@
       </a>
     </div>
     <div class="product" data-tags="ALL　緑谷出久　麗日お茶子　爆豪勝己　轟焦凍　ホークス　常闇踏影　耳郎響香　死柄木弔　トガヒミコ　通形ミリオ　波動ねじれ　天喰環　甲矢有弓">
-      <a href="product25-1.html">
+      <a href="product25.html">
         <img src="images25/ImageDrain-20250602T121255.027Z.JPEG" alt="">
-        <p>色紙コレクション（全8種／ランダム1種入り）</p>
+        <p>色紙コレクション</p>
       </a>
     </div>
     <div class="product" data-tags="ALL">
