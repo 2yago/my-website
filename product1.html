@@ -16,6 +16,7 @@
       overflow: hidden;
       width: 800px;
       margin: 20px auto;
+      touch-action: pan-y;
     }
 
     .carousel-track {
@@ -111,9 +112,9 @@
   let prevTranslate = 0;
   let dragging = false;
 
-  track.addEventListener('touchstart', touchStart);
-  track.addEventListener('touchmove', touchMove);
-  track.addEventListener('touchend', touchEnd);
+  track.addEventListener('touchstart', touchStart, { passive: true });
+  track.addEventListener('touchmove', touchMove, { passive: true });
+  track.addEventListener('touchend', touchEnd, { passive: true });
 
  function touchStart(e) {
     startX = e.touches[0].clientX;
