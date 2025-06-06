@@ -9,21 +9,27 @@
       margin: 20px;
       font-size: 16px;
       line-height: 1.6;
-　　　　-webkit-overflow-scrolling: touch;
+　　　 -webkit-overflow-scrolling: touch;
     }
 
     .carousel {
       position: relative;
-      overflow: hidden;
+  overflow-x: scroll; /* ここをoverflow:hiddenから変更 */
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;  /* IE用スクロールバー非表示 */
+  scrollbar-width: none;     /* Firefox用スクロールバー非表示 */
       width: 800px;
       margin: 20px auto;
     }
+
+.carousel::-webkit-scrollbar {
+  display: none; /* Chrome, Safari用スクロールバー非表示 */
+}
 
     .carousel-track {
       display: flex;
       transition: transform 0.3s ease;
       will-change: transform;
-      touch-action: pan-y; /* ← 重要: 縦スクロール許可 */
     }
 
     .carousel-track img {
