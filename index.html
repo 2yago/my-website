@@ -5,46 +5,24 @@
   <title>商品一覧ページ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow-y: auto !important;
-      -webkit-overflow-scrolling: touch;
-      font-family: sans-serif;
+ body { font-family: sans-serif; margin: 20px; }
+    .keywords button {
+      margin: 5px; padding: 5px 10px; border: none;
+      background-color: #e0e0e0; border-radius: 5px;
+      cursor: pointer;
     }
-
-    #productList {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-      padding: 10px;
-    }
-
-    .product {
-      background-color: #f9f9f9;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .product img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-radius: 5px;
-    }
-
-    .product p {
-      margin-top: 10px;
-      font-size: 14px;
-    }
-
+    .product { margin: 10px 0; display: flex; align-items: center; }
+    .product img { width: 100px; height: 100px; object-fit: cover; margin-right: 15px; }
+    .hidden { display: none; }
     .product a {
-      text-decoration: none;
       color: black;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
     }
-
+    .product a p {
+      margin: 0;
+    }
     .cart-link {
   display: inline-block;
   padding: 8px 16px;
@@ -59,6 +37,7 @@
 .cart-link:hover {
   background-color: #1a7cd6;
 }
+
 
   </style>
 </head>
