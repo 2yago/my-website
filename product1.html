@@ -105,24 +105,31 @@
   let currentIndex = 0;
 
   let startX = 0;
+  let startY = 0;
   let currentTranslate = 0;
   let prevTranslate = 0;
   let dragging = false;
 
-  track.addEventListener('touchstart', touchStart);
+  track.addEventListener('touchstart', touchStart, { passive: true });
   track.addEventListener('touchmove', touchMove, { passive: false });
-  track.addEventListener('touchend', touchEnd);
+  track.addEventListener('touchend', touchEnd, { passive: true });
 
   function touchStart(e) {
     startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
     dragging = true;
   }
 
   function touchMove(e) {
     if (!dragging) return;
     const currentX = e.touches[0].clientX;
-    const diff = currentX - startX;
-    currentTranslate = prevTranslate + diff;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - startX;
+    const diffY = currentY - startY;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      e.preventDefault();
+    currentTranslate = prevTranslate + diffX;
     track.style.transform = `translateX(${currentTranslate}px)`;
   }
 
