@@ -1,3 +1,5 @@
+product1.html
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,22 +11,14 @@
       margin: 20px;
       font-size: 16px;
       line-height: 1.6;
-　　　 -webkit-overflow-scrolling: touch;
     }
 
     .carousel {
       position: relative;
-  overflow-x: scroll; /* ここをoverflow:hiddenから変更 */
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;  /* IE用スクロールバー非表示 */
-  scrollbar-width: none;     /* Firefox用スクロールバー非表示 */
+      overflow: hidden;
       width: 800px;
       margin: 20px auto;
     }
-
-.carousel::-webkit-scrollbar {
-  display: none; /* Chrome, Safari用スクロールバー非表示 */
-}
 
     .carousel-track {
       display: flex;
@@ -39,10 +33,9 @@
       -webkit-user-drag: none;
       border-radius: 8px;
     }
-
     p {
-      font-size: 16px;
-      line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.6;
     }
   </style>
 </head>
@@ -122,29 +115,20 @@
   track.addEventListener('touchmove', touchMove);
   track.addEventListener('touchend', touchEnd);
 
- function touchStart(e) {
+  function touchStart(e) {
     startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
     dragging = true;
   }
 
   function touchMove(e) {
     if (!dragging) return;
-
     const currentX = e.touches[0].clientX;
-    const currentY = e.touches[0].clientY;
-    const diffX = currentX - startX;
-    const diffY = currentY - startY;
-
-    // 横スクロールだけ処理
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-      e.preventDefault(); // 横スクロールのときだけスクロール抑制
-      currentTranslate = prevTranslate + diffX;
-      track.style.transform = `translateX(${currentTranslate}px)`;
-    }
+    const diff = currentX - startX;
+    currentTranslate = prevTranslate + diff;
+    track.style.transform = `translateX(${currentTranslate}px)`;
   }
 
-  function touchEnd() {
+  function touchEnd(e) {
     dragging = false;
     const movedBy = currentTranslate - prevTranslate;
 
@@ -158,7 +142,7 @@
   }
 
   function setPositionByIndex() {
-    currentTranslate = -currentIndex * 800;
+    currentTranslate = -currentIndex * 800; // 画像幅に合わせる
     prevTranslate = currentTranslate;
     track.style.transform = `translateX(${currentTranslate}px)`;
   }
