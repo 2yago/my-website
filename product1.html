@@ -13,7 +13,7 @@
 
     .carousel {
       position: relative;
-      overflow: overflow-x: scroll;
+      overflow: hidden;
       width: 800px;
       margin: 20px auto;
     }
@@ -110,7 +110,7 @@
   let dragging = false;
 
   track.addEventListener('touchstart', touchStart);
-  track.addEventListener('touchmove', touchMove);
+  track.addEventListener('touchmove', touchMove, { passive: false });
   track.addEventListener('touchend', touchEnd);
 
   function touchStart(e) {
